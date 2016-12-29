@@ -1,0 +1,8 @@
+version: '2'
+
+services: 
+  api-provider:
+    image: api-provider
+    container_name: api-provider
+    ports:
+      - 8080:8080
