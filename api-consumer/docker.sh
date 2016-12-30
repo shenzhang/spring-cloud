@@ -8,4 +8,4 @@ DIR=$(pwd)
 export JAR_FILE=$(cd build/libs && ls *.jar)
 cd $DIR
 
-docker build -f ./docker/Dockerfile -t api-provider:latest --build-arg jar=$JAR_FILE .
+docker build -f ./docker/Dockerfile -t api-consumer:latest --build-arg jar=$JAR_FILE .

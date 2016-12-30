@@ -1,0 +1,72 @@
+group = 'com.github.shenzhang.cloud.consumer'
+version = '1.0.0-SNAPSHOT'
+
+ext {
+    springbootVersion = '1.4.3.RELEASE'
+}
+
+buildscript {
+    repositories {
+        maven { url 'http://127.0.0.1:8081/nexus/content/groups/public' }
+        jcenter()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
+    }
+}
+
+apply plugin: 'spring-boot'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.0'
+}
+
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+
+    repositories {
+        maven { url 'http://127.0.0.1:8081/nexus/content/groups/public' }
+        jcenter()
+    }
+}
+
+idea {
+    project {
+        jdkName = '1.8'
+        languageLevel = '1.8'
+
+        ipr {
+            withXml { provider ->
+                provider.node.component
+                        .find { it.@name == 'VcsDirectoryMappings' }
+                        .mapping.@vcs = 'Git'
+            }
+        }
+    }
+}
+
+dependencies {
+    compile(
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-actuator',
+
+            'com.google.guava:guava:18.0',
+            'log4j:log4j:1.2.17'
+    )
+
+    testCompile(
+            'org.codehaus.groovy:groovy-all:2.3.6',
+            'junit:junit:4.11',
+            'org.easymock:easymock:3.2'
+    )
+}
+
+task docker(type: Exec) {
+    commandLine './docker.sh'
+}

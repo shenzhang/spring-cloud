@@ -1,8 +1,20 @@
 version: '2'
 
 services: 
-  api-provider:
+  api-provider1:
     image: api-provider
-    container_name: api-provider
+    container_name: api-provider1
     ports:
-      - 8080:8080
+      - 10000:8080
+
+  api-provider2:
+    image: api-provider
+    container_name: api-provider2
+    ports:
+      - 10001:8080
+      
+  api-consumer1:
+    image: api-consumer
+    container_name: api-consumer1
+    ports:
+      - 9000:8080
