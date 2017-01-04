@@ -1,20 +1,51 @@
 version: '2'
 
 services: 
+  consul-server:
+    image: consul
+    container_name: consul-server
+    ports: 
+      - 8500:8500
+
+#   consul-server1:
+#     image: consul
+#     container_name: consul-server1
+#     ports: 
+#       - 8501:8500
+#     command: /apps/docker/wait-for-it.sh -s -t 15 consul agent -dev -join=consul-server
+#     depends_on: 
+#       - consul-server
+
   api-provider1:
-    image: api-provider
+    image: shenzhang/api-provider
     container_name: api-provider1
     ports:
       - 10000:8080
+    command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "15", "consul-server:8500", "--", "./run.sh"]
+    depends_on: 
+      - consul-server
 
   api-provider2:
-    image: api-provider
+    image: shenzhang/api-provider
     container_name: api-provider2
     ports:
       - 10001:8080
+    command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "15", "consul-server:8500", "--", "./run.sh"]
+    depends_on: 
+      - consul-server
+
+#   api-provider3:
+#     image: shenzhang/api-provider
+#     container_name: api-provider3
+#     ports:
+#       - 10002:8080
+#     command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "15", "consul-server:8500", "--", "./run.sh"]
       
   api-consumer1:
-    image: api-consumer
+    image: shenzhang/api-consumer
     container_name: api-consumer1
     ports:
-      - 9000:8080
+      - 9000:9000
+    command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "15", "consul-server:8500", "--", "./run.sh"]
+    depends_on: 
+      - consul-server

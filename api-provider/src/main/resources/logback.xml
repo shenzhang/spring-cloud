@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOG_HOME" value="/apps/boot/logs"/>
+    <property name="LOG_HOME" value="logs"/>
 
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -29,5 +29,6 @@
 
     <root level="info">
         <appender-ref ref="stdout"/>
+        <appender-ref ref="applicationFile"/>
     </root>
 </configuration>

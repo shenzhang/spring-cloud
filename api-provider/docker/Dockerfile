@@ -1,4 +1,4 @@
-FROM cloud-base
+FROM shenzhang/cloud-base
 MAINTAINER shenzhang
 
 ARG jar
