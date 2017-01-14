@@ -4,7 +4,6 @@ spring:
   cloud:
     consul:
       host: consul-server
-#      host: localhost
       port: 8500
       enabled: true
       discovery:

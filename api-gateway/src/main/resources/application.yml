@@ -1,0 +1,15 @@
+spring.application.name: api-gateway
+
+spring:
+  cloud:
+    consul:
+      host: consul-server
+      port: 8500
+      enabled: true
+      discovery:
+        register: false
+
+
+zuul:
+  routes:
+    api-provider: /api-provider/**

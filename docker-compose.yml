@@ -7,15 +7,6 @@ services:
     ports: 
       - 8500:8500
 
-#   consul-server1:
-#     image: consul
-#     container_name: consul-server1
-#     ports: 
-#       - 8501:8500
-#     command: /apps/docker/wait-for-it.sh -s -t 15 consul agent -dev -join=consul-server
-#     depends_on: 
-#       - consul-server
-
   api-provider1:
     image: shenzhang/api-provider
     container_name: api-provider1
@@ -34,13 +25,6 @@ services:
     depends_on: 
       - consul-server
 
-#   api-provider3:
-#     image: shenzhang/api-provider
-#     container_name: api-provider3
-#     ports:
-#       - 10002:8080
-#     command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "15", "consul-server:8500", "--", "./run.sh"]
-      
   api-consumer1:
     image: shenzhang/api-consumer
     container_name: api-consumer1
@@ -49,3 +33,37 @@ services:
     command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "15", "consul-server:8500", "--", "./run.sh"]
     depends_on: 
       - consul-server
+
+#   api-gateway:
+#     image: shenzhang/api-gateway
+#     container_name: api-gateway
+#     ports:
+#       - 20000:8080
+#     command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "15", "consul-server:8500", "--", "./run.sh"]
+#     depends_on: 
+#       - consul-server
+
+#   api-provider1:
+#     image: shenzhang/api-provider
+#     container_name: api-provider1
+#     ports:
+#       - 10000:8080
+#     volumes: 
+#       - ./api-provider/config:/apps/boot/config
+#     # command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "30", "elasticsearch:9200", "--", "./run.sh"]
+#     command: ["./run.sh"]
+
+#   elasticsearch:
+#     image: elasticsearch
+#     container_name: elasticsearch
+#     ports:
+#       - 9200:9200
+#       - 9300:9300
+
+#   kibana:
+#     image: kibana
+#     container_name: kibana
+#     ports:
+#       - 5601:5601
+#     depends_on: 
+#       - elasticsearch

@@ -24,6 +24,14 @@ public class ConsulController {
     @Autowired
     private ApiProviderDao apiProviderDao;
 
+//    @Autowired
+//    @LoadBalanced
+//    private RestTemplate loadBalancedRestTemplate;
+
+//    @Autowired
+//    @LoadBalanced
+//    private RestTemplate restTemplate;
+
     /**
      * 从所有服务中选择一个服务（轮询）
      */
@@ -44,4 +52,14 @@ public class ConsulController {
     public String call() {
         return apiProviderDao.getInfo();
     }
+
+//    @RequestMapping(value = "/call1", produces = "application/json")
+//    public String callUsingLoadBalancedRestTemplate() {
+//        return loadBalancedRestTemplate.getForObject("http://api-provider/info", String.class);
+//    }
+//
+//    @RequestMapping(value = "/call2", produces = "application/json")
+//    public String callUsingRestTemplate() {
+//        return restTemplate.getForObject("http://api-provider/info", String.class);
+//    }
 }

@@ -5,9 +5,21 @@ server.port: 9000
 spring:
   cloud:
     consul:
+      enabled: false
       host: consul-server
-#      host: localhost
       port: 8500
-      enabled: true
       discovery:
         register: false
+
+
+# sleuth
+spring.sleuth.sampler.percentage: 1
+
+# zipkin
+spring:
+  zipkin:
+    base-url: http://192.168.99.100:9411/
+    host: 192.168.99.100
+    pport: 9411
+
+zipkin.service.port: 8080

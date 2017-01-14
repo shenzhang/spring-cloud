@@ -1,4 +1,4 @@
-group = 'com.github.shenzhang.cloud'
+group = 'com.github.shenzhang.cloud.gateway'
 version = '1.0.0-SNAPSHOT'
 
 ext {
@@ -40,24 +40,20 @@ idea {
     project {
         jdkName = '1.8'
         languageLevel = '1.8'
-
-//        ipr {
-//            withXml { provider ->
-//                provider.node.component
-//                        .find { it.@name == 'VcsDirectoryMappings' }
-//                        .mapping.@vcs = 'Git'
-//            }
-//        }
     }
 }
 
 dependencies {
     compile(
-            'org.springframework.boot:spring-boot-starter-web',
-            'org.springframework.boot:spring-boot-starter-actuator',
+//            'org.springframework.boot:spring-boot-starter-web',
+//            'org.springframework.boot:spring-boot-starter-actuator',
             'org.springframework.cloud:spring-cloud-starter-consul:1.1.2.RELEASE',
             'org.springframework.cloud:spring-cloud-starter-consul-discovery:1.1.2.RELEASE',
-            'org.springframework.cloud:spring-cloud-netflix-core:1.2.3.RELEASE',
+//            'org.springframework.cloud:spring-cloud-netflix-core:1.2.3.RELEASE',
+//            'org.springframework.cloud:spring-cloud-starter-feign:1.2.3.RELEASE',
+//            'org.springframework.cloud:spring-cloud-starter-hystrix:1.2.3.RELEASE',
+//            'org.springframework.cloud:spring-cloud-starter-hystrix-dashboard:1.2.3.RELEASE',
+            'org.springframework.cloud:spring-cloud-starter-zuul:1.2.3.RELEASE',
 
             'com.google.guava:guava:18.0'
     )

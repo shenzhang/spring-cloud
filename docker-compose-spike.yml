@@ -1,8 +1,0 @@
-version: '2'
-
-services: 
-  consul-server:
-    image: consul
-    container_name: consul-server
-    ports: 
-      - 8500:8500
