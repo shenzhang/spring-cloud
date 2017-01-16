@@ -7,29 +7,42 @@ services:
     ports: 
       - 8500:8500
 
+  api-admin:
+    image: shenzhang/api-admin
+    container_name: api-admin
+    ports:
+      - 11000:8080
+    command: ["./run.sh"]
+
   api-provider1:
     image: shenzhang/api-provider
     container_name: api-provider1
     ports:
       - 10000:8080
+    volumes: 
+      - ./api-provider/config:/apps/boot/config
     command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "15", "consul-server:8500", "--", "./run.sh"]
     depends_on: 
       - consul-server
 
-  api-provider2:
-    image: shenzhang/api-provider
-    container_name: api-provider2
-    ports:
-      - 10001:8080
-    command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "15", "consul-server:8500", "--", "./run.sh"]
-    depends_on: 
-      - consul-server
+#   api-provider2:
+#     image: shenzhang/api-provider
+#     container_name: api-provider2
+#     ports:
+#       - 10001:8080
+#     volumes: 
+#       - ./api-provider/config:/apps/boot/config
+#     command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "15", "consul-server:8500", "--", "./run.sh"]
+#     depends_on: 
+#       - consul-server
 
   api-consumer1:
     image: shenzhang/api-consumer
     container_name: api-consumer1
     ports:
       - 9000:9000
+    volumes: 
+      - ./api-consumer/config:/apps/boot/config
     command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "15", "consul-server:8500", "--", "./run.sh"]
     depends_on: 
       - consul-server
@@ -43,27 +56,29 @@ services:
 #     depends_on: 
 #       - consul-server
 
-#   api-provider1:
-#     image: shenzhang/api-provider
-#     container_name: api-provider1
-#     ports:
-#       - 10000:8080
-#     volumes: 
-#       - ./api-provider/config:/apps/boot/config
-#     # command: ["/apps/docker/wait-for-it.sh", "-s", "-t", "30", "elasticsearch:9200", "--", "./run.sh"]
-#     command: ["./run.sh"]
-
-#   elasticsearch:
-#     image: elasticsearch
-#     container_name: elasticsearch
-#     ports:
-#       - 9200:9200
-#       - 9300:9300
-
-#   kibana:
-#     image: kibana
-#     container_name: kibana
-#     ports:
-#       - 5601:5601
-#     depends_on: 
-#       - elasticsearch
+  elasticsearch:
+    image: elasticsearch
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - ES_JAVA_OPTS=-Xmx512m -Xms512m
+  
+  logstash:
+    image: logstash
+    container_name: logstash
+    volumes: 
+      - ./logstash:/apps/config
+    ports: 
+      - 5044:5044
+    command: ["logstash", "-f", "/apps/config/logstash.conf"]
+    
+  
+  kibana:
+    image: kibana
+    container_name: kibana
+    ports:
+      - 5601:5601
+    depends_on: 
+      - elasticsearch

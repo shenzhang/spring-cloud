@@ -13,10 +13,7 @@ filebeat.prospectors:
   multiline.match: after
 
 fields:
-  application: api-provider
-
-# output.elasticsearch:
-#   hosts: ["elasticsearch:9200"]
+  application: api-admin
 
 output.logstash:
   hosts: ["logstash:5044"]

@@ -1,0 +1,20 @@
+spring.application.name: api-consumer
+
+server.port: 9000
+
+server.tomcat.accesslog:
+  enabled: true
+  directory: /apps/boot/logs
+
+logging.config: config/logback.xml
+
+spring.boot.admin.url: http://api-admin:8080
+
+spring:
+  cloud:
+    consul:
+      enabled: true
+      host: consul-server
+      port: 8500
+      discovery:
+        register: false

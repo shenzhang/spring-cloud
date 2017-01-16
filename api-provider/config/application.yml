@@ -1,5 +1,13 @@
 spring.application.name: api-provider
 
+server.tomcat.accesslog:
+  enabled: true
+  directory: /apps/boot/logs
+
+logging.config: config/logback.xml
+
+spring.boot.admin.url: http://api-admin:8080
+
 spring:
   cloud:
     consul:
