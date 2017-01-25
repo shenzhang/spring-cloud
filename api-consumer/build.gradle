@@ -63,10 +63,10 @@ dependencies {
             'org.springframework.cloud:spring-cloud-starter-hystrix',
             'org.springframework.cloud:spring-cloud-starter-hystrix-dashboard',
 
-            'de.codecentric:spring-boot-admin-starter-client:1.3.3',
+            'de.codecentric:spring-boot-admin-starter-client:1.4.5',
+            'org.jolokia:jolokia-core',
 
             'org.springframework.cloud:spring-cloud-starter-sleuth',
-//            'org.springframework.cloud:spring-cloud-sleuth-zipkin:1.1.0.RELEASE',
             'org.springframework.cloud:spring-cloud-sleuth-zipkin',
 
             'com.google.guava:guava:18.0'

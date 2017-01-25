@@ -53,6 +53,16 @@ public class ConsulController {
         return apiProviderDao.getInfo();
     }
 
+    @RequestMapping(value = "/call/ip", produces = "application/json")
+    public String callIp() {
+        return apiProviderDao.getIp();
+    }
+
+    @RequestMapping(value = "/call/error", produces = "application/json")
+    public String triggerError() {
+        return apiProviderDao.triggerError();
+    }
+
 //    @RequestMapping(value = "/call1", produces = "application/json")
 //    public String callUsingLoadBalancedRestTemplate() {
 //        return loadBalancedRestTemplate.getForObject("http://api-provider/info", String.class);

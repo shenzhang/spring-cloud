@@ -3,7 +3,7 @@ version = '1.0.0-SNAPSHOT'
 
 ext {
     springbootVersion = '1.4.3.RELEASE'
-    springAdmin = '1.3.3'
+    springAdmin = '1.4.5'
 }
 
 buildscript {
@@ -48,6 +48,7 @@ dependencies {
     compile(
             "de.codecentric:spring-boot-admin-server:$springAdmin",
             "de.codecentric:spring-boot-admin-server-ui:$springAdmin",
+            "de.codecentric:spring-boot-admin-server-ui-hystrix:$springAdmin",
 
             'com.google.guava:guava:18.0'
     )
